@@ -1,8 +1,6 @@
 Travail réalisé par:  - Marouane Kachouri
-	                  - Thomas Monti
 
 
-NB: par rapport à la disponibilité des rooms on a opté pour comparer la date sélectionnée avec les réservations de la room et s'il y'a
-intersection on affiche un message d'erreur que la room est déja réservée au lieu de réaliser une entité "indisponibilité".
+Ce projet est la mise en place d'un site web similaire à AirBnb qui permet la gestion des réservations des locaux par les clients et les propriétaires.
+Les technologies utilisées sont: PHP, symfony, doctrine, HTML, CSS, BootStrap, JavaScript, Twig
 
-Merci pour la lecture.	
