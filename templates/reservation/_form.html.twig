@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+<div class="container">
+    <div class="row">
+        <div class="col form-group">
+            {{ form_row(form.DateDebut) }}
+        </div>
+        <div class="col">
+            <div class="form-group">
+                    {{ form_row(form.DateFin) }}
+            </div>
+        </div>
+        <div class="col-lg-6 offset-md-3 text-center form-group">
+    	    <button class="btn btn-success">{{ button_label|default('Reserve') }}</button>
+  	    </div>
+    </div>
+</div>
+{{ form_end(form) }}

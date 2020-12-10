@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liked rooms{% endblock %}
+
+{% block body %}
+
+    <!-- ##### Rooms Area Start ##### -->
+    <section class="rooms-area section-padding-0-100">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6">
+                    <div class="section-heading text-center">
+                        <div class="line-"></div>
+                        <h2>Your Likes</h2>
+                    </div>
+                </div>
+            </div>
+
+            {% for room in rooms %}
+                <div class="row">
+                    <!-- Single Rooms Area -->
+                    <div class="col-12 col-lg-4">
+                        <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+                            <!-- Thumbnail -->
+                            <div class="bg-thumbnail bg-img" style="background-image: url({{ vich_uploader_asset(room, 'imageFile') }});"></div>
+                            <!-- Price -->
+                            <p class="price-from">{{ room.price }}/night</p>
+                            <!-- Rooms Text -->
+                            <div class="rooms-text">
+                                <div class="line"></div>
+                                <h4>{{ room.summary }}</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-8">
+                        <div class="about-text text-center mb-100">
+                            <div class="section-heading text-center">
+                                <div class="line-"></div>
+                                <h2>{{ room.summary }}</h2>
+                                <h5>{{ room.description }}</h5>
+                            </div>
+                            <p>Address : {{ room.address }}</p>
+                            <div class="about-key-text">
+                                <h6><span class="fa fa-check"></span> Superfacy : {{ room.superficy }}</h6>
+                                <h6><span class="fa fa-check"></span> Capacity : {{ room.capacity }}</h6>
+                            </div>
+                            <a href="{{ path('room_show', {'id': room.id}) }}" class="btn palatin-btn mt-50">More details!</a>
+                            <a href="{{ path('reservation_new', {'id': room.id}) }}" class="btn palatin-btn mt-50">Make reservation</a>
+                            <a href="{{ path('like_delete', {'id': room.id}) }}" class="btn palatin-btn mt-50">Delete from likes</a>
+                            {% if app.user %}
+                            	{% if app.user.ClientAuth %}
+                                    {% set found = false %}
+                            		{% for reservation in app.user.ClientAuth.reservations %}
+                            			{% if (room.id==reservation.resRoom.id and not found) %}
+                            					<a href="{{ path('comments_new', {'id': room.id}) }}" class="btn palatin-btn mt-50">Add a comment</a>
+                                            {% set found = true %}
+                           				{% endif %}
+                           			{% endfor %}
+                           		{% endif %}
+                           	{% endif %}
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- ##### Rooms Area End ##### -->
+
+{% endblock %}

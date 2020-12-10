@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %} {#OWNEER ANNOUNCEMENTS LIST#}
+
+{% block title %}Your announcements{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+	<section class="rooms-area section-padding-0-100">
+        <div class="row">
+            <div class="col-md-3 offset-md-3"></div>
+            <div class="col-md-3 offset-md-3">
+                <a href="/room/new" class = "btn btn-success">Add a new room</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6">
+                    <div class="section-heading text-center">
+                        <div class="line-"></div>
+                        <h2>Here are your announcements!</h2>
+                    </div>
+                </div>
+            </div>
+
+            {% for room in rooms %}
+                <div class="row">
+                    <!-- Single Rooms Area -->
+                    <div class="col-12 col-lg-4">
+                        <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+                            <!-- Thumbnail -->
+                            <div class="bg-thumbnail bg-img" style="background-image: url({{ vich_uploader_asset(room, 'imageFile') }});"></div>
+                            <!-- Price -->
+                        <p class="price-from">{{ room.price }}/night</p>
+                            <!-- Rooms Text -->
+                            <div class="rooms-text">
+                                <div class="line"></div>
+                                <h4>{{ room.summary }}</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-8">
+                        <div class="about-text text-center mb-100">
+                            <div class="section-heading text-center">
+                                <div class="line-"></div>
+                                <h3>{{ room.summary }}</h3>
+                                <h5>{{ room.description }}</h5>
+                            </div>
+                            <p>Address: {{ room.address }}</p>
+                            <div class="about-key-text">
+                                <h6><span class="fa fa-check"></span> Superficy : {{ room.superficy }}</h6>
+                                <h6><span class="fa fa-check"></span> Capacity : {{ room.capacity }}</h6>
+                            </div>
+							<a href="{{ path('room_show', {'id': room.id}) }}" class="btn palatin-btn mt-50">Moderate comments</a>
+                            <a href="{{ path('room_edit', {'id': room.id}) }}" class="btn palatin-btn mt-50">Edit</a>
+                        </div>
+                    </div>
+                </div>
+                   
+       
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

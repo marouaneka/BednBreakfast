@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.Stars) }}
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.Description) }}
+        </div>
+    </div>
+</div>
+    <br>
+<div class="row justify-content-center">
+    <button class="btn btn-success">{{ button_label|default('Comment') }}</button>
+</div>
+{{ form_end(form) }}

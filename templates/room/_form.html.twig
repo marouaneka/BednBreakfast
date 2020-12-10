@@ -1,0 +1,77 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.imageName) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.imageFile) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.summary) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.capacity) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.superficy) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.price) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.address) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.regions) }}
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <button class="btn btn-success" id="ButtonSave">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Select Region{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Select the region in which you want to find rooms:</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="dropdown class="col-lg-6 offset-md-4">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Select a region
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                {% for region in regions %}
+                    <li><h1><a href="{{ path('room_region_show', {'name': region.name}) }}" class="txt1" style="font-size: 24px">{{ region.name }}</a></h1></li>
+                {% else %}
+                    <li>NO REGIONS FOUND!!</li></ul>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

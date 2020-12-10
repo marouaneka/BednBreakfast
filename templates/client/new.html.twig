@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Client{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Create new Client</h1>
+            </div>
+        </div>
+    </div>
+
+    {{ include('client/_form.html.twig') }}
+{% endblock %}

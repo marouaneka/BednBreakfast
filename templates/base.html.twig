@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!-- CSS here -->
+    {% block stylesheets %}
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
+
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('assets/img/core-img/favicon.ico') }}">
+
+        <!-- Core Stylesheet -->
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/util.css') }}">
+    {% endblock %}
+</head>
+
+  
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="cssload-container">
+            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="palatin-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="palatinNav">
+
+                        <!-- Nav brand -->
+                        <a href="/" class="nav-brand"><img src="{{ asset('assets/img/core-img/logo.png') }}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    {% if app.user %}
+                                        	{% if app.user.AuthOwner %}
+                                        		<li><a href="{{ path('owner_profile', {'id': app.user.AuthOwner.id}) }}">Home</a></li>
+                                        		<li><a href="{{ path('owner_edit', {'id': app.user.AuthOwner.id}) }}">Modify My info</a></li>
+                                        		<li><a href="{{ path('room_list', {'id': app.user.AuthOwner.id}) }}">My Rooms</a></li>
+                                        	 {% elseif app.user.ClientAuth %}
+                                        	 	<li><a href="{{ path('client_profile', {'id': app.user.ClientAuth.id}) }}">Home</a></li>
+                                        	 	<li><a href="{{ path('client_edit', {'id': app.user.ClientAuth.id}) }}">Modify My info</a></li>
+                                        	 	<li><a href="{{ path('client_reservations', {'id': app.user.ClientAuth.id}) }}">My reservations</a></li>
+                                        	 	<li><a href="{{ path('client_likes', {'id': app.user.ClientAuth.id}) }}">My Likes</a></li>
+                                        	 {% else %}
+                                                 <li><a href="{{ path('client_index')}}">Clients</a></li>
+                                                 <li><a href="{{ path('owner_index')}}">Owners</a></li>
+                                                 <li><a href="{{ path('region_index')}}">Regions</a></li>
+                                                 <li><a href="{{ path('room_index')}}">Rooms</a></li>
+                                                 <li><a href="{{ path('reservation_index')}}">Reservations</a></li>
+                                                 <li><a href="{{ path('comments_index')}}">Comments</a></li>
+                                        	 {% endif %}
+                                        
+                                   {% else%}
+                                            <li><a href="/login">Login</a></li>
+                                   {% endif %}
+                                   
+                                  
+                                    <li><a href="#">Contact</a>
+                                        <ul class="dropdown">
+                                        	<li><a>(555) 555-1234</a></li>
+                                        	<li><a>Apple St, Fruitland</a></li>
+                                            <li><a href="https://www.facebook.com/marwen.kachouri">Facebook</a></li>
+                                            <li><a href="https://www.instagram.com/p/B4jX0auBKsr/">Instagram</a></li>
+                                            <li><a href="https://www.youtube.com/watch?v=QH2-TGUlwu4">Youtube</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                               {% if app.user %}
+                        			<li><a href="/logout">Logout</a></li>
+                        	{% endif %}
+                        			
+                                </ul>
+                                
+                            <!-- Button -->     
+                        {% if app.user %}
+                               {% if app.user.AuthOwner %}
+                                <div class="menu-btn">
+                                    <a href="/room/new" class="btn palatin-btn">Create an announcement!</a>
+                                </div>
+                               {% endif %}
+                               {% if app.user.ClientAuth %}
+                                 <div class="menu-btn">
+                                    <a href="/selectregion" class="btn palatin-btn">Make a Reservation!</a>
+                                </div>
+                               {% endif %}
+                                
+                         {% endif %}
+
+
+
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+  
+    
+    <!-- ##### Header Area End ##### -->
+
+    <br><br>
+  {%  block alerts %}
+             {% for type, messages in app.session.flashBag.all %}
+                {% for message in messages %}
+        {%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+        {%if type == 'message'%} {% set type = 'info' %} {%endif%}
+        <div class="alert alert-{{ type }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <p>{{ message|raw }}</p>
+        </div>
+    	        {% endfor %}
+   			 {% endfor %}
+        {% endblock %} {# alerts #}
+    {% block body %}{% endblock %}
+	
+	
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area h-40">
+        <div class="container">
+            <div class="row">
+
+                <!-- Footer Widget Area -->
+                <div class="col-12 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <a href="/" class="d-block mb-5"><img src="{{ asset('assets/img/core-img/logo.png') }}" alt=""></a>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Location</h6>
+                        <p><i class="fa fa-map-marker"></i>&nbsp;1525 Boring Lane, <br>Los Angeles, CA</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Reception</h6>
+                        <p><i class="fa fa-phone"></i>&nbsp;(+33) 06 01 28 39 31</p>
+                        </div>
+                    </div>
+
+                <div class="col-12 col-md-6 col-lg-3 text-center">
+                    <div class="footer-widget-area mt-50">
+                        <h6 class="widget-title mb-5">Follow us on Social Media</h6>
+                        <div class="social-info mt-50 wow fadeInUp" data-wow-delay="600ms" style="visibility: visible; animation-delay: 600ms; animation-name: fadeInUp;">
+                            <a href="#" style="font-size: 16px"><i class="fa fa-pinterest" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="https://www.facebook.com/marwen.kachouri" style="font-size: 16px"><i class="fa fa-facebook" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#" style="font-size: 16px"><i class="fa fa-twitter" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#" style="font-size: 16px"><i class="fa fa-dribbble" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#" style="font-size: 16px"><i class="fa fa-behance" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                            <a href="#" style="font-size: 16px"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+	{% block javascripts %}
+
+        <!-- ##### All Javascript Script ##### -->
+        <!-- jQuery-2.2.4 js -->
+        <script src="{{ asset('assets/js/jquery/jquery-2.2.4.min.js') }}"></script>
+        <!-- Popper js -->
+        <script src="{{ asset('assets/js/bootstrap/popper.min.js') }}"></script>
+        <!-- Bootstrap js -->
+        <script src="{{ asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>
+        <!-- All Plugins js -->
+        <script src="{{ asset('assets/js/plugins/plugins.js') }}"></script>
+        <!-- Active js -->
+        <script src="{{ asset('assets/js/active.js') }}"></script>
+
+    {% endblock %}
+
+
+
+</body>
+
+</html>

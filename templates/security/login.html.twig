@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body%}
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-form-title" style="background-image: url({{ asset('assets/img/blog-img/2.jpg') }});">
+                        <span class="login100-form-title-1">
+                            Sign In
+                        </span>
+                </div>
+
+                <form class="login100-form validate-form" method="post">
+
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a href="/logout">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                        <span class="label-input100">Email</span>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="input100" placeholder="Email" required autofocus>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+                        <span class="label-input100">Password</span>
+                        <input class="input100" type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Remember me
+                            </label>
+                        </div>
+					</div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="submit">
+                            Sign in
+                        </button>
+                    </div>
+                    <br><br><br><br>
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div><center>
+                        	Don't have an account?</center><br>
+                            <a href="/register" class="labelRedirectionTxt" style="font-size : 20px">Sign up as an owner</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="/registerclient" class="txt" style="font-size : 20px">Sign up as a client</a>
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

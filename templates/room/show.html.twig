@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Room</h1>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ room.id }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ room.summary }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ room.description }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ room.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Superficy</th>
+                <td>{{ room.superficy }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ room.price }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ room.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+     {% if app.user %}
+                                        	
+             {%if app.user.ClientAuth %}
+                          <center> <a href="{{ path('reservation_new' , {'id' : room.id })  }}">make a reservation</a></center>
+                 {%elseif not app.user.AuthOwner %}
+    						<a href="{{ path('room_index') }}">back to list</a>
+
+   							 <a href="{{ path('room_edit', {'id': room.id}) }}">edit</a>
+
+    	                    {{ include('room/_delete_form.html.twig') }}
+                 {% endif %}
+            {% endif %}
+ 
+{% endblock %}

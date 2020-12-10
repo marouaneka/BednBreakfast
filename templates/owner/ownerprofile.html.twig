@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %} {#OWNEER PROFILE#}
+
+{% block title %} Profile owner {% endblock %}
+
+
+{% block body %}
+
+    {% if is_granted('ROLE_OWNER') %}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Welcome {% if owner.firstname %} {{ owner.firstname }}{% endif %} {{ owner.familyname }}</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 col-md-3"></div>
+        <div class="col-12 col-md-1">
+            <a href="/room/new" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-plus"></i>
+                        <h4 style="color: white">Create an announcement</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-1 ml-auto">
+            <a href="/owner/{{ owner.id }}/room/list" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-check"></i>
+                        <h4 style="color: white">Check my announcements</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-1 ml-auto">
+            <a href="{{ path('owner_edit', {'id': owner.id}) }}" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-user"></i>
+                        <h4 style="color: white">Modify my profile</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-3 ml-auto"></div>
+
+    </div>
+    
+
+
+{% else %}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+        <div class="section-heading text-center">
+            <div class="line-"></div>
+            <h1>You are not allowed to enter this page. Please register as an owner to be allowed to use this page!</h1>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

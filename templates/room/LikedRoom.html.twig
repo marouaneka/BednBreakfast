@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liked Room{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>This room has been {{ value }} your likes</h1>
+            </div>
+        </div>
+    </div>
+
+    <section class="contact-information-area">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-lg-4">
+                    <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Thumbnail -->
+                        <div class="bg-thumbnail bg-img" style="background-image: url({{ vich_uploader_asset(room, 'imageFile') }});"></div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3"></div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="single-contact-information mb-100">
+                        <br><br><br><br>
+                        <div class="section-text">
+                            <h3>{{ room.summary }}</h3>
+                            <p>{{ room.description }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Address</p>
+                            <p>{{ room.address }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Capacity</p>
+                            <p>{{ room.capacity }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Superficy</p>
+                            <p>{{ room.superficy }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Price</p>
+                            <p><strong>{{ room.price }} &euro;/night</strong></p>
+                        </div>
+                        <br>
+                        <div class="contact-content d-flex">
+                            {% if app.user %}
+
+                                {%if app.user.ClientAuth %}
+                                    <button class="btn palatin-btn btn-3 m-2"><a href="{{ path('reservation_new' , {'id' : room.id })  }}" >make a reservation</a></button>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

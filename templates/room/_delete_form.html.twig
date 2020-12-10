@@ -1,0 +1,10 @@
+<form method="post" action="{{ path('room_delete', {'id': room.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ room.id) }}">
+    {% if app.user %}
+        {% if app.user.ClientAuth %}
+        {% else %}
+            <button class="btn btn-danger" id="buttonDelete">Delete</button>
+        {% endif %}
+    {% endif %}
+</form>

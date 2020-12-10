@@ -1,0 +1,40 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.firstname) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.familyname) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.address) }}
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            {{ form_row(form.country) }}
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-3 offset-md-1">
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    </div>
+</div>
+  
+{{ form_end(form) }}

@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}  {#ROOM#}
+
+{% block title %}Room{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Room Info</h1>
+            </div>
+        </div>
+    </div>
+
+    <section class="contact-information-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+                        <!-- Thumbnail -->
+                        <div class="bg-thumbnail bg-img" style="background-image: url( {{ vich_uploader_asset(room, 'imageFile') }} );"></div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-2"></div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="single-contact-information mb-100">
+                        <br><br><br><br>
+                        <div class="section-text">
+                            <h2>{{ room.summary }}</h2>
+                            <h5>{{ room.description }}</h5>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Address</p>
+                            <p>{{ room.address }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Capacity</p>
+                            <p>{{ room.capacity }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Superficy</p>
+                            <p>{{ room.superficy }}</p>
+                        </div>
+
+                        <div class="contact-content d-flex">
+                            <p>Price</p>
+                            <p><strong>{{ room.price }} &euro;/night</strong></p>
+                        </div>
+                               {% if app.user %}
+        		{% if app.user.ClientAuth %}
+        			<br><center><button  class="btn btn-info"><a  href="{{ path('reservation_new', {'id': room.id}) }}">Make a reservation!</a></button></center>
+        		{% endif %}
+        	{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Room's comments</h1>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br>
+    {% for comment in room.comments %}
+    <div class="blog-area section-padding-0-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="palatin-blog-posts">
+                        <div class="single-blog-post mb-100 wow fadeInUp" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
+
+                            <div class="post-content">
+                                <a href="#" class="post-title">{{ comment.description }}</a>
+                                <div class="post-meta d-flex justify-content-center">
+                                    <a  class="post-catagory" style="font-size: 18px">Rating:
+                                        {% if comment.stars == 1 %}
+                                            <i class="fa fa-star"></i>
+                                        {% elseif comment.stars == 2 %}
+                                            <i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>
+                                        {% elseif comment.stars == 3 %}
+                                            <i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>
+                                        {% elseif comment.stars == 4 %}
+                                            <i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>
+                                        {% elseif comment.stars == 5 %}
+                                            <i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>&nbsp;<i class="fa fa-star"></i>
+                                        {% endif%}
+                                        
+                                        {% if app.user %}
+                                        	{% if not app.user.ClientAuth %}
+                                        	<br>
+                                        	{{ include('comments/_delete_form.html.twig') }}
+                                        	{% endif %}
+                                        	{% if app.user.ClientAuth %}
+                                        		{% for cmnt in app.user.ClientAuth.comments  %}
+                                        			{% if cmnt.id==comment.id %}
+                                        				{{ include('comments/_delete_form.html.twig') }}
+                                        		    {% endif %}
+                                        		{% endfor %}
+                                        				
+                                        	{% endif %}
+                                        {% endif %}
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="blog-area section-padding-0-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="palatin-blog-posts">
+                            <div class="single-blog-post mb-100 wow fadeInUp" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
+
+                                <div class="post-content">
+                                    <a href="#" class="post-title">No comments for this room</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %} {#CLIENT PROFILE#}
+
+{% block title %}{{ client.ClFamilyName }}'s profile{% endblock %}
+
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Welcome {% if client.ClFirstName %} {{ client.ClFirstName }}{% endif %} {{ client.ClFamilyName}}</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 col-md-3"></div>
+        <div class="col-12 col-md-1">
+            <a href="/selectregion" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-calendar"></i>
+                        <h4 style="color: white">Make a reservation</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-1 ml-auto">
+            <a href="{{ path('client_likes', {'id': client.id}) }}" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-heart"></i>
+                        <h4 style="color: white">Check my liked rooms</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-1 ml-auto">
+            <a href="{{ path('client_reservations', {'id': client.id}) }}" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-calendar-check-o"></i>
+                        <h4 style="color: white">Check my reservations</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-1 ml-auto">
+            <a href="{{ path('client_edit', {'id': client.id}) }}" class="txt1" style="font-size : 20px">
+                <div class="single-cool-fact mb-100">
+                    <div class="scf-text">
+                        <i class="fa fa-user"></i>
+                        <h4 style="color: white">Modify my profile</h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-3 ml-auto"></div>
+
+    </div>
+    
+{% endblock %}

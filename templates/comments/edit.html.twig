@@ -1,0 +1,29 @@
+    {% extends 'base.html.twig' %}
+
+{% block title %}Edit Comments{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <a href="javascript:history.back()" class="txt1" style="font-size: 18px"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp; Go back</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+       <div class="col-12 col-lg-6">
+            <div class="section-heading text-center">
+                <div class="line-"></div>
+                <h1>Edit Comment</h1>
+            </div>
+       </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ include('comments/_form.html.twig', {'button_label': 'Update'}) }}<br>
+            {{ include('comments/_delete_form.html.twig') }}
+        </div>
+    </div>
+    
+{% endblock %}
